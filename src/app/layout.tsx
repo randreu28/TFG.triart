@@ -1,3 +1,4 @@
+import NavBar from "@/components/NavBar";
 import "./globals.css";
 
 export const metadata = {
@@ -13,7 +14,10 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className="font-groteske">{children}</body>
+      <body className="font-groteske">
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
