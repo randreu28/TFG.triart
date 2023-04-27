@@ -1,10 +1,12 @@
 import Button from "@/components/Button";
 import Feature from "@/components/Feature";
+import Footer from "@/components/Footer";
 import {
   AdjustmentsVerticalIcon,
   ArrowUpOnSquareIcon,
   ShareIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -69,9 +71,37 @@ export default function Home() {
           </Feature>
         </div>
       </section>
-      <div className="h-[150vh] flex justify-center items-center">
-        Hello world
-      </div>
+
+      <section className="flex justify-center items-center">
+        <div className="max-w-3xl space-y-10">
+          <h1 className="text-6xl">
+            Get{" "}
+            <span className="underline decoration-2 decoration-teal-500">
+              inspired
+            </span>
+            , explore other people&apos;s work!
+          </h1>
+
+          <p className="text-gray-300 max-w-xl">
+            See the work of people from all around the world, get inspired and
+            start working on your own ideas faster.
+          </p>
+
+          <div className="flex gap-5">
+            <Button styleType="primary">Get started</Button>
+            <Button styleType="secondary">Sign in</Button>
+          </div>
+        </div>
+        <Image
+          src="/homepage-feature.png"
+          width={500}
+          height={500}
+          className="rounded-full"
+          alt="Decoration image"
+          priority
+        />
+      </section>
+      <Footer />
     </>
   );
 }
