@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import Feature from "@/components/Feature";
 import Footer from "@/components/Footer";
 import {
@@ -30,8 +29,18 @@ export default function Home() {
             A 3D art sharing space where you can promote your work to the world
           </p>
           <div className="flex gap-5">
-            <Button styleType="primary">Get started</Button>
-            <Button styleType="secondary">Sign in</Button>
+            <a
+              href="/sign-up"
+              className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
+            >
+              Get started
+            </a>
+            <a
+              href="/sign-in"
+              className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
+            >
+              Sign in
+            </a>
           </div>
         </div>
       </main>
@@ -88,8 +97,18 @@ export default function Home() {
           </p>
 
           <div className="flex gap-5">
-            <Button styleType="primary">Get started</Button>
-            <Button styleType="secondary">Sign in</Button>
+            <a
+              href="/sign-up"
+              className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
+            >
+              Get started
+            </a>
+            <a
+              href="/sign-in"
+              className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
+            >
+              Sign in
+            </a>
           </div>
         </div>
         <Image
