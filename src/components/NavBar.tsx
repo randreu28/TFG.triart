@@ -22,9 +22,13 @@ export default function NavBar({}: Props) {
           Tri<span className="text-teal-400">Art</span>
         </h1>
       </div>
-      <div className="px-4 gap-5 md:gap:10 flex text-lg text-center">
-        <a>Get Started</a>
-        <a>Sign in</a>
+      <div className="px-4 gap-5 md:gap:10 flex text-lg text-center ">
+        <a className="hover:underline" href="/sign-up">
+          Get Started
+        </a>
+        <a className="hover:underline" href="/sign-in">
+          Sign in
+        </a>
       </div>
     </nav>
   );
