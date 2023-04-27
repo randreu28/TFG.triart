@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#101012]/50 p-5 mt-10 flex justify-between text-gray-300">
+    <footer className="w-full bg-[#101012]/50 p-5 mt-10 flex flex-col md:flex-row gap-5 items-start justify-between text-gray-300">
       <a
         href="https://randreu.dev"
         className="flex gap-5 items-center hover:opacity-50 duration-300"

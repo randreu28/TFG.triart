@@ -20,7 +20,7 @@ export default function Home() {
         }}
         className="h-screen flex items-center"
       >
-        <div className="px-20 space-y-5">
+        <div className="px-5 md:px-20 space-y-5">
           <p className="text-teal-500">Presenting</p>
           <h1 className="text-5xl font-bold">
             Tri<span className="text-teal-500">Art</span>
@@ -82,7 +82,7 @@ export default function Home() {
       </section>
 
       <section className="flex justify-center items-center">
-        <div className="max-w-3xl space-y-10">
+        <div className="max-w-3xl space-y-10 p-5">
           <h1 className="text-6xl">
             Get{" "}
             <span className="underline decoration-2 decoration-teal-500">
@@ -115,7 +115,7 @@ export default function Home() {
           src="/homepage-feature.png"
           width={500}
           height={500}
-          className="rounded-full"
+          className="rounded-full hidden md:block"
           alt="Decoration image"
           priority
         />
