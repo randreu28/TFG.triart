@@ -1,5 +1,6 @@
 import NavBar from "@/components/NavBar";
 import "./globals.css";
+import SupabaseProvider from "@/components/SupabaseProvider";
 
 export const metadata = {
   title: "TriArt",
@@ -15,8 +16,10 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className="font-groteske">
-        <NavBar />
-        {children}
+        <SupabaseProvider>
+          <NavBar />
+          {children}
+        </SupabaseProvider>
       </body>
     </html>
   );
