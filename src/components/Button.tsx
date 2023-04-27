@@ -9,7 +9,7 @@ export default function Button({ children, styleType, ...props }: Props) {
       return (
         <button
           {...props}
-          className="bg-teal-500 text-black px-3 py-2 rounded text-xl"
+          className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
         >
           {children}
         </button>
@@ -19,7 +19,7 @@ export default function Button({ children, styleType, ...props }: Props) {
       return (
         <button
           {...props}
-          className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl"
+          className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
         >
           {children}
         </button>
@@ -29,7 +29,7 @@ export default function Button({ children, styleType, ...props }: Props) {
       return (
         <button
           {...props}
-          className="border-red-500 border-2 bg-red-500/25 px-3 py-2 rounded text-xl"
+          className="border-red-500 border-2 bg-red-500/25 px-3 py-2 rounded text-xl hover:opacity-50 duration-300"
         >
           {children}
         </button>
