@@ -1,13 +1,35 @@
 "use client";
 
+import ErrorMessage from "@/components/ErrorMessage";
+import { useForm } from "react-hook-form";
+
+type FormData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 export default function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<FormData>();
+
   async function SignInWithGoogle() {
     alert("sign in with google");
   }
 
-  async function SignInWithEmail() {
-    alert("sign in with emial");
-  }
+  const SignInWithEmail = handleSubmit(async (formData) => {
+    if (formData.password !== formData.confirmPassword) {
+      setError("confirmPassword", { message: "Password's don't match" });
+      return;
+    }
+
+    alert("Sign in with email");
+    console.log(formData);
+  });
 
   return (
     <form
@@ -108,32 +130,52 @@ export default function SignUp() {
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Email address</label>
           <input
+            required
+            {...register("email")}
             className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
             type="email"
           />
         </div>
 
+        {errors.email?.message && (
+          <ErrorMessage>{errors.email.message}</ErrorMessage>
+        )}
+
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Password</label>
           <input
+            required
+            {...register("password")}
             className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
             type="password"
           />
         </div>
+
+        {errors.password?.message && (
+          <ErrorMessage>{errors.password.message}</ErrorMessage>
+        )}
 
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Confirm password</label>
           <input
+            required
+            {...register("confirmPassword")}
             className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
             type="password"
           />
         </div>
 
-        <br />
+        {errors.confirmPassword?.message && (
+          <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
+        )}
+
+        {errors.root?.message && (
+          <ErrorMessage>{errors.root.message}</ErrorMessage>
+        )}
 
         <button
           type="submit"
-          className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300 w-full focus:outline-none focus:ring-4"
+          className="bg-teal-500 text-black px-3 py-2 rounded text-xl !mt-5 hover:opacity-50 duration-300 w-full focus:outline-none focus:ring-4"
         >
           Sign up
         </button>
