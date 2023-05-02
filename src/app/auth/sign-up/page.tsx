@@ -25,23 +25,18 @@ export default function SignUp() {
       return;
     }
     const toastID = toast.loading("Loading");
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
     });
 
-    if (error || !data.user) {
-      toast.error(
-        error
-          ? error.message
-          : "There has been a error creating your account. Please try again later",
-        { id: toastID }
-      );
+    if (error) {
+      toast.error(error.message, { id: toastID });
     } else {
-      toast.success(
-        `A confirmation email has been sent to ${data.user.email}`,
-        { id: toastID, duration: 5000 }
-      );
+      toast.success(`A confirmation email has been sent to ${formData.email}`, {
+        id: toastID,
+        duration: 5000,
+      });
     }
   });
 
