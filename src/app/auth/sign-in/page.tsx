@@ -1,47 +1,35 @@
 "use client";
 
 import { useSupabase } from "@/components/SupabaseProvider";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 
 type FormData = {
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
-export default function SignUp() {
+export default function SignIn() {
   const { register, handleSubmit } = useForm<FormData>();
-
   const { supabase } = useSupabase();
+  const router = useRouter();
 
   async function SignInWithGoogle() {
     supabase.auth.signInWithOAuth({ provider: "google" });
   }
 
   const SignInWithEmail = handleSubmit(async (formData) => {
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords don't match!");
-      return;
-    }
     const toastID = toast.loading("Loading");
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
 
-    if (error || !data.user) {
-      toast.error(
-        error
-          ? error.message
-          : "There has been a error creating your account. Please try again later",
-        { id: toastID }
-      );
+    if (error) {
+      toast.error(error.message, { id: toastID });
     } else {
-      toast.success(
-        `A confirmation email has been sent to ${data.user.email}`,
-        { id: toastID, duration: 5000 }
-      );
+      router.push("/dashboard");
     }
   });
 
@@ -93,7 +81,7 @@ export default function SignUp() {
           />
         </svg>
         <h1 className="text-2xl font-bold text-center">
-          Sign up to Tri<span className="text-teal-500">Art</span>
+          Sign in to Tri<span className="text-teal-500">Art</span>
         </h1>
         <button
           type="button"
@@ -142,13 +130,13 @@ export default function SignUp() {
               transform="matrix(.72727 0 0 .72727 -.955 -1.455)"
             />
           </svg>
-          <span>Sign up with Google </span>
+          <span>Sign in with Google </span>
           <span className="w-5 h-5" />
         </button>
         <div className="flex justify-between items-center">
           <span className="border border-teal-500 w-24 h-0" />
           <p className="w-fit text-gray-300 text-center">
-            Or sign up with email
+            Or sign in with email
           </p>
           <span className="border border-teal-500 w-24 h-0" />
         </div>
@@ -163,20 +151,19 @@ export default function SignUp() {
         </div>
 
         <div className="flex flex-col space-y-3">
-          <label className="text-xl">Password</label>
+          <span className="flex justify-between">
+            <label className="text-xl">Password</label>
+            <a
+              href="/auth/password-recovery"
+              className="flex justify-center text-gray-300 hover:underline text-center"
+            >
+              Forgot your password?
+            </a>
+          </span>
+
           <input
             required
             {...register("password")}
-            className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
-            type="password"
-          />
-        </div>
-
-        <div className="flex flex-col space-y-3">
-          <label className="text-xl">Confirm password</label>
-          <input
-            required
-            {...register("confirmPassword")}
             className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
             type="password"
           />
@@ -186,15 +173,15 @@ export default function SignUp() {
           type="submit"
           className="bg-teal-500 text-black px-3 py-2 rounded text-xl !mt-5 hover:opacity-50 duration-300 w-full focus:outline-none focus:ring-4"
         >
-          Sign up
+          Sign in
         </button>
         <div className="flex justify-between items-center pb-5 lg:pb-0">
           <span className="border border-teal-500 w-36 h-0" />
           <a
-            href="/sign-in"
+            href="/auth/sign-up"
             className="w-fit text-gray-300 hover:underline text-center"
           >
-            Or sign in
+            Or sign up
           </a>
           <span className="border border-teal-500 w-36 h-0" />
         </div>

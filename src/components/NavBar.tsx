@@ -51,10 +51,10 @@ export default function NavBar({ session }: Props) {
           </span>
         ) : (
           <>
-            <a className="hover:underline" href="/sign-up">
+            <a className="hover:underline" href="/auth/sign-up">
               Get Started
             </a>
-            <a className="hover:underline" href="/sign-in">
+            <a className="hover:underline" href="/auth/sign-in">
               Sign in
             </a>
           </>

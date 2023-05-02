@@ -30,13 +30,13 @@ export default function Home() {
           </p>
           <div className="flex gap-5">
             <a
-              href="/sign-up"
+              href="/auth/sign-up"
               className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300 focus:outline-none focus:ring-4"
             >
               Get started
             </a>
             <a
-              href="/sign-in"
+              href="/auth/sign-in"
               className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl hover:opacity-50 duration-300 focus:outline-none focus:ring-4"
             >
               Sign in
@@ -98,13 +98,13 @@ export default function Home() {
 
           <div className="flex gap-5">
             <a
-              href="/sign-up"
+              href="/auth/sign-up"
               className="bg-teal-500 text-black px-3 py-2 rounded text-xl hover:opacity-50 duration-300 focus:outline-none focus:ring-4"
             >
               Get started
             </a>
             <a
-              href="/sign-in"
+              href="/auth/sign-in"
               className="border-teal-500 border-2 bg-teal-950 px-3 py-2 rounded text-xl hover:opacity-50 duration-300 focus:outline-none focus:ring-4"
             >
               Sign in

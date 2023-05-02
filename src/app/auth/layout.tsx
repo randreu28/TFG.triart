@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default async function SignUpLayout({ children }: Props) {
+export default async function AuthLayout({ children }: Props) {
   const supabase = createServerComponentSupabaseClient<Database>({
     headers,
     cookies,
