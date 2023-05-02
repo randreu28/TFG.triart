@@ -18,12 +18,12 @@ export default function Footer() {
               y1="231.96"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#ef079b"></stop>
-              <stop offset="0.11" stop-color="#f11890"></stop>
-              <stop offset="0.36" stop-color="#f43a7a"></stop>
-              <stop offset="0.6" stop-color="#f6526a"></stop>
-              <stop offset="0.82" stop-color="#f86160"></stop>
-              <stop offset="1" stop-color="#f8665d"></stop>
+              <stop offset="0" stopColor="#ef079b"></stop>
+              <stop offset="0.11" stopColor="#f11890"></stop>
+              <stop offset="0.36" stopColor="#f43a7a"></stop>
+              <stop offset="0.6" stopColor="#f6526a"></stop>
+              <stop offset="0.82" stopColor="#f86160"></stop>
+              <stop offset="1" stopColor="#f8665d"></stop>
             </linearGradient>
           </defs>
           <g data-name="Capa 2">
