@@ -1,9 +1,8 @@
 "use client";
 
-import ErrorMessage from "@/components/ErrorMessage";
 import { useSupabase } from "@/components/SupabaseProvider";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 type FormData = {
   email: string;
@@ -12,15 +11,9 @@ type FormData = {
 };
 
 export default function SignUp() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const { supabase } = useSupabase();
-  const [success, setSuccess] = useState<string | null>(null);
 
   async function SignInWithGoogle() {
     supabase.auth.signInWithOAuth({ provider: "google" });
@@ -28,24 +21,27 @@ export default function SignUp() {
 
   const SignInWithEmail = handleSubmit(async (formData) => {
     if (formData.password !== formData.confirmPassword) {
-      setError("confirmPassword", { message: "Password's don't match" });
+      toast.error("Passwords don't match!");
       return;
     }
-
-    const { error, data } = await supabase.auth.signUp({
+    const toastID = toast.loading("Loading");
+    const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
     });
 
     if (error || !data.user) {
-      setSuccess(null);
-      setError("root", {
-        message: error
+      toast.error(
+        error
           ? error.message
           : "There has been a error creating your account. Please try again later",
-      });
+        { id: toastID }
+      );
     } else {
-      setSuccess(`A confirmation email has been sent to ${data.user.email}`);
+      toast.success(
+        `A confirmation email has been sent to ${data.user.email}`,
+        { id: toastID, duration: 5000 }
+      );
     }
   });
 
@@ -54,6 +50,21 @@ export default function SignUp() {
       onSubmit={SignInWithEmail}
       className="bg-black/25 rounded flex max-w-5xl items-center m-4"
     >
+      <Toaster
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#222",
+            color: "#fff",
+          },
+          success: {
+            iconTheme: {
+              primary: "rgb(0, 184, 166)",
+              secondary: "#222",
+            },
+          },
+        }}
+      />
       <div
         className="w-[35rem] h-[45rem] hidden lg:block"
         style={{
@@ -150,9 +161,7 @@ export default function SignUp() {
             type="email"
           />
         </div>
-        {errors.email?.message && (
-          <ErrorMessage>{errors.email.message}</ErrorMessage>
-        )}
+
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Password</label>
           <input
@@ -162,9 +171,7 @@ export default function SignUp() {
             type="password"
           />
         </div>
-        {errors.password?.message && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
+
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Confirm password</label>
           <input
@@ -174,14 +181,7 @@ export default function SignUp() {
             type="password"
           />
         </div>
-        {errors.confirmPassword?.message && (
-          <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-        )}
-        {errors.root?.message && (
-          <ErrorMessage>{errors.root.message}</ErrorMessage>
-        )}
 
-        {success && <ErrorMessage>{success}</ErrorMessage>}
         <button
           type="submit"
           className="bg-teal-500 text-black px-3 py-2 rounded text-xl !mt-5 hover:opacity-50 duration-300 w-full focus:outline-none focus:ring-4"
