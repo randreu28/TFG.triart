@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/components/ErrorMessage";
 import { useSupabase } from "@/components/SupabaseProvider";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 type FormData = {
@@ -20,7 +20,7 @@ export default function SignUp() {
   } = useForm<FormData>();
 
   const { supabase } = useSupabase();
-  const router = useRouter();
+  const [success, setSuccess] = useState<string | null>(null);
 
   async function SignInWithGoogle() {
     supabase.auth.signInWithOAuth({ provider: "google" });
@@ -32,15 +32,20 @@ export default function SignUp() {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { error, data } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
     });
 
-    if (error) {
-      setError("root", { message: error.message });
+    if (error || !data.user) {
+      setSuccess(null);
+      setError("root", {
+        message: error
+          ? error.message
+          : "There has been a error creating your account. Please try again later",
+      });
     } else {
-      router.push("/dashboard");
+      setSuccess(`A confirmation email has been sent to ${data.user.email}`);
     }
   });
 
@@ -76,11 +81,9 @@ export default function SignUp() {
             clipRule="evenodd"
           />
         </svg>
-
         <h1 className="text-2xl font-bold text-center">
           Sign up to Tri<span className="text-teal-500">Art</span>
         </h1>
-
         <button
           type="button"
           onClick={SignInWithGoogle}
@@ -131,7 +134,6 @@ export default function SignUp() {
           <span>Sign up with Google </span>
           <span className="w-5 h-5" />
         </button>
-
         <div className="flex justify-between items-center">
           <span className="border border-teal-500 w-24 h-0" />
           <p className="w-fit text-gray-300 text-center">
@@ -139,7 +141,6 @@ export default function SignUp() {
           </p>
           <span className="border border-teal-500 w-24 h-0" />
         </div>
-
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Email address</label>
           <input
@@ -149,11 +150,9 @@ export default function SignUp() {
             type="email"
           />
         </div>
-
         {errors.email?.message && (
           <ErrorMessage>{errors.email.message}</ErrorMessage>
         )}
-
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Password</label>
           <input
@@ -163,11 +162,9 @@ export default function SignUp() {
             type="password"
           />
         </div>
-
         {errors.password?.message && (
           <ErrorMessage>{errors.password.message}</ErrorMessage>
         )}
-
         <div className="flex flex-col space-y-3">
           <label className="text-xl">Confirm password</label>
           <input
@@ -177,15 +174,14 @@ export default function SignUp() {
             type="password"
           />
         </div>
-
         {errors.confirmPassword?.message && (
           <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
         )}
-
         {errors.root?.message && (
           <ErrorMessage>{errors.root.message}</ErrorMessage>
         )}
 
+        {success && <ErrorMessage>{success}</ErrorMessage>}
         <button
           type="submit"
           className="bg-teal-500 text-black px-3 py-2 rounded text-xl !mt-5 hover:opacity-50 duration-300 w-full focus:outline-none focus:ring-4"
