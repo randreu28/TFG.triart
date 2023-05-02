@@ -1,8 +1,26 @@
-type Props = {};
-export default function NavBar({}: Props) {
+"use client";
+
+import { Session } from "@supabase/supabase-js";
+import { useSupabase } from "./SupabaseProvider";
+
+type Props = {
+  session: Session | null;
+};
+
+export default function NavBar({ session }: Props) {
+  const { supabase } = useSupabase();
+
+  async function signOut() {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <nav className="fixed backdrop-blur-lg bg-black/50 w-screen p-4 flex justify-between items-center">
-      <div className="flex gap-3 items-center">
+      <a href="/" className="flex gap-3 items-center">
         <svg
           className="w-10 h-10 text-teal-400"
           xmlns="http://www.w3.org/2000/svg"
@@ -18,17 +36,29 @@ export default function NavBar({}: Props) {
             clipRule="evenodd"
           />
         </svg>
+
         <h1 className="text-3xl font-bold">
           Tri<span className="text-teal-400">Art</span>
         </h1>
-      </div>
+      </a>
       <div className="px-4 gap-5 md:gap:10 flex text-lg text-center ">
-        <a className="hover:underline" href="/sign-up">
-          Get Started
-        </a>
-        <a className="hover:underline" href="/sign-in">
-          Sign in
-        </a>
+        {session ? (
+          <span className="text-right">
+            <p className="">{session.user.email}</p>
+            <button className="underline" onClick={signOut}>
+              Log out
+            </button>
+          </span>
+        ) : (
+          <>
+            <a className="hover:underline" href="/sign-up">
+              Get Started
+            </a>
+            <a className="hover:underline" href="/sign-in">
+              Sign in
+            </a>
+          </>
+        )}
       </div>
     </nav>
   );
