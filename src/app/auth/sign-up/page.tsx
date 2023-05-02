@@ -19,7 +19,7 @@ export default function SignUp() {
     supabase.auth.signInWithOAuth({ provider: "google" });
   }
 
-  const SignInWithEmail = handleSubmit(async (formData) => {
+  const SignUpWithEmail = handleSubmit(async (formData) => {
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords don't match!");
       return;
@@ -42,7 +42,7 @@ export default function SignUp() {
 
   return (
     <form
-      onSubmit={SignInWithEmail}
+      onSubmit={SignUpWithEmail}
       className="bg-black/25 rounded flex max-w-5xl items-center m-4"
     >
       <Toaster
