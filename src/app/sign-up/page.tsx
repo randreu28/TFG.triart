@@ -1,6 +1,8 @@
 "use client";
 
 import ErrorMessage from "@/components/ErrorMessage";
+import { useSupabase } from "@/components/SupabaseProvider";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 type FormData = {
@@ -17,8 +19,11 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<FormData>();
 
+  const { supabase } = useSupabase();
+  const router = useRouter();
+
   async function SignInWithGoogle() {
-    alert("sign in with google");
+    supabase.auth.signInWithOAuth({ provider: "google" });
   }
 
   const SignInWithEmail = handleSubmit(async (formData) => {
@@ -27,8 +32,16 @@ export default function SignUp() {
       return;
     }
 
-    alert("Sign in with email");
-    console.log(formData);
+    const { error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (error) {
+      setError("root", { message: error.message });
+    } else {
+      router.push("/dashboard");
+    }
   });
 
   return (
