@@ -2,6 +2,7 @@
 
 import { Session } from "@supabase/supabase-js";
 import { useSupabase } from "./SupabaseProvider";
+import { usePathname } from "next/navigation";
 
 type Props = {
   session: Session | null;
@@ -9,6 +10,7 @@ type Props = {
 
 export default function NavBar({ session }: Props) {
   const { supabase } = useSupabase();
+  const pathName = usePathname();
 
   async function signOut() {
     const { error } = await supabase.auth.signOut();
@@ -41,14 +43,32 @@ export default function NavBar({ session }: Props) {
           Tri<span className="text-teal-400">Art</span>
         </h1>
       </a>
-      <div className="px-4 gap-5 md:gap:10 flex text-lg text-center ">
+      <div className="px-4 gap-5 md:gap:10 flex text-lg items-center text-center">
         {session ? (
-          <span className="text-right">
-            <p className="">{session.user.email}</p>
-            <button className="underline" onClick={signOut}>
-              Log out
-            </button>
-          </span>
+          <>
+            <a
+              href="/dashboard"
+              className={
+                pathName === "/dashboard" ? "text-teal-500 font-bold" : ""
+              }
+            >
+              Dashboard
+            </a>
+            <a
+              href="/publish"
+              className={
+                pathName === "/publish" ? "text-teal-500 font-bold" : ""
+              }
+            >
+              Publish
+            </a>
+            <span className="text-right pl-10">
+              <p className="">{session.user.email}</p>
+              <button className="underline" onClick={signOut}>
+                Log out
+              </button>
+            </span>
+          </>
         ) : (
           <>
             <a className="hover:underline" href="/auth/sign-up">
