@@ -51,7 +51,7 @@ export default function NavBar({ session }: Props) {
           Tri<span className="text-teal-400">Art</span>
         </h1>
       </a>
-      <div className="px-4 gap-5 md:gap:10 text-lg items-center text-center hidden md:flex">
+      <div className="px-4 gap-5 md:gap:10 items-center text-center hidden md:flex">
         {session ? (
           <>
             {routes.map((route) => (
@@ -159,7 +159,7 @@ export default function NavBar({ session }: Props) {
                   </Popover.Button>
                 </div>
               </div>
-              <div className="p-5 pb-3 space-y-3 flex flex-col divide-gray-700 text-xl">
+              <div className="p-5 pb-3 space-y-3 flex flex-col divide-gray-700">
                 {session ? (
                   <>
                     {routes.map((route) => (
