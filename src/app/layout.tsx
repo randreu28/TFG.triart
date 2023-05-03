@@ -4,7 +4,6 @@ import SupabaseProvider from "@/components/SupabaseProvider";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/utils/db.types";
 import { cookies, headers } from "next/dist/client/components/headers";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "TriArt",
@@ -25,10 +24,6 @@ export default async function RootLayout({ children }: Props) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
-  if (session) {
-    redirect("/dashboard");
-  }
 
   return (
     <html lang="en">
