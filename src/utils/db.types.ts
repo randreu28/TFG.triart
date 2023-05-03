@@ -11,27 +11,33 @@ export interface Database {
     Tables: {
       artwork: {
         Row: {
-          created_at: string | null
+          created_at: string
+          file_name: string
           id: number
           title: string
           url: string
           user_id: string
+          views: number
           visiblity: string
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
+          file_name: string
           id?: number
           title: string
           url: string
           user_id: string
+          views?: number
           visiblity: string
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
+          file_name?: string
           id?: number
           title?: string
           url?: string
           user_id?: string
+          views?: number
           visiblity?: string
         }
       }
