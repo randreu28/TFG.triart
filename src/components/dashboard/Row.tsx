@@ -1,5 +1,7 @@
+import { selectionAtom } from "@/utils/dashboard.store";
 import { Database } from "@/utils/db.types";
 import { CubeIcon } from "@heroicons/react/24/outline";
+import { useAtom, useSetAtom } from "jotai";
 
 type Props = Database["public"]["Tables"]["artwork"]["Row"];
 
@@ -15,12 +17,20 @@ export function Row({
     new Date(Date.parse(created_at))
   );
 
+  const [selection, setSelection] = useAtom(selectionAtom);
+
   return (
     <tr className="h-[70px]">
       <td className="p-4 text-sm font-medium whitespace-nowrap">
         <div className="inline-flex items-center gap-x-3">
           <input
-            onChange={(e) => console.log(e.target.checked, id)}
+            onChange={(e) => {
+              e.target.checked
+                ? setSelection([...selection, id])
+                : setSelection(
+                    selection.filter((selectionId) => selectionId !== id)
+                  );
+            }}
             type="checkbox"
             className="accent-teal-500"
           />
@@ -52,7 +62,7 @@ export function Row({
           {visiblity}
         </span>
       </td>
-      <td className="p-4 text-sm text-gray-300 whitespace-nowrap">{views}</td>
+      <td className="p-4 text-sm text-gray-300 whitespace-nowrap">{id}</td>
     </tr>
   );
 }

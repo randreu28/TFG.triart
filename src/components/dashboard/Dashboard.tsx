@@ -65,10 +65,7 @@ export default function Dashboard({ session }: Props) {
                       scope="col"
                       className="p-4 text-sm font-normal text-left text-gray-400 w-2/5"
                     >
-                      <div className="flex items-center gap-x-3">
-                        <input type="checkbox" className="accent-teal-500" />
-                        <span>File name</span>
-                      </div>
+                      File name
                     </th>
                     <th
                       scope="col"
