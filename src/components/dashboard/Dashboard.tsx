@@ -1,20 +1,25 @@
 "use client";
 
+import Rows from "@/components/dashboard/Rows";
+import {
+  artworksAtom,
+  errorAtom,
+  paginationAtom,
+} from "@/utils/dashboard.store";
 import { Database } from "@/utils/db.types";
+import { getPagination } from "@/utils/utils";
 import {
   ArrowLongLeftIcon,
   ArrowLongRightIcon,
-  ArrowPathIcon,
   ArrowUpTrayIcon,
   EyeIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { PostgrestError, Session } from "@supabase/supabase-js";
+import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { useSupabase } from "../SupabaseProvider";
-import Rows from "@/components/dashboard/Rows";
-import { getPagination } from "@/utils/utils";
 
 type Props = {
   session: Session;
@@ -25,9 +30,9 @@ export type Artworks = Database["public"]["Tables"]["artwork"]["Row"][];
 export default function Dashboard({ session }: Props) {
   const { supabase } = useSupabase();
 
-  const [artworks, setArtworks] = useState<Artworks>();
-  const [pagination, setPagination] = useState<number>(0);
-  const [error, setError] = useState<PostgrestError>();
+  const [artworks, setArtworks] = useAtom(artworksAtom);
+  const [pagination, setPagination] = useAtom(paginationAtom);
+  const [error, setError] = useAtom(errorAtom);
 
   async function getArtworks() {
     setArtworks(undefined); // loading
