@@ -12,7 +12,11 @@ export default function Rows({ artworks, error }: RowsProps) {
     <>
       <tr className="h-[70px]">
         <th />
-        <th className="text-left font-light text-red-500">{error.message}</th>
+        <th className="text-center text-red-500 font-light flex flex-col whitespace-nowrap">
+          <br />
+          <span>{error.message}</span>
+          <br />
+        </th>
         <th />
         <th />
         <th />
@@ -34,11 +38,13 @@ export default function Rows({ artworks, error }: RowsProps) {
       <>
         <tr className="h-[70px]">
           <th />
-          <th className="text-center text-gray-300 font-light">
-            Wanna upload more artworks?
+          <th className="text-center text-gray-300 font-light flex flex-col whitespace-nowrap">
+            <br />
+            <span>Wanna upload more artworks?</span>
             <a href="/publish" className="text-teal-500 hover:underline">
               Publish
             </a>
+            <br />
           </th>
           <th />
           <th />
