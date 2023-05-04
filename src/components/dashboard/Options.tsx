@@ -13,7 +13,22 @@ export default function Options() {
   const selection = useAtomValue(selectionAtom);
   const { supabase } = useSupabase();
 
-  async function handleDelete() {}
+  async function handleDelete() {
+    if (confirm("Are you sure you want to delete your artwork?")) {
+      selection.forEach(async (id) => {
+        const toastID = toast.loading("Loading");
+        const { error } = await supabase.from("artwork").delete().eq("id", id);
+        if (error) {
+          toast.error(error.message, { id: toastID, duration: 5000 });
+        } else {
+          toast.success("Artwork deleted successfully", {
+            id: toastID,
+            duration: 5000,
+          });
+        }
+      });
+    }
+  }
 
   async function handleEditTite() {}
 
