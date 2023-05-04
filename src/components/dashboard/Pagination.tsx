@@ -12,7 +12,7 @@ export default function Pagination() {
       <button
         disabled={pagination === 0}
         onClick={() => setPagination(pagination - 1)}
-        className="flex items-center text-sm gap-3 justify-center border-teal-500 border bg-teal-950 px-5 py-2 rounded transition-colors hover:bg-teal-800 focus:outline-none focus:ring-4 duration-300"
+        className="flex items-center disabled:cursor-not-allowed text-sm gap-3 justify-center border-teal-500 border bg-teal-950 px-5 py-2 rounded transition-colors hover:bg-teal-800 focus:outline-none focus:ring-4 duration-300"
       >
         <ArrowLongLeftIcon className="w-5 h-5" />
         <span>Previous</span>
@@ -21,21 +21,21 @@ export default function Pagination() {
         <button
           onClick={() => setPagination(pagination - 3)}
           disabled={pagination - 3 < 0}
-          className="px-2 py-1 text-sm rounded-md hover:bg-teal-950 text-gray-300"
+          className="px-2 py-1 text-sm disabled:cursor-not-allowed rounded-md hover:bg-teal-950 text-gray-300"
         >
           {pagination - 3}
         </button>
         <button
           onClick={() => setPagination(pagination - 2)}
           disabled={pagination - 2 < 0}
-          className="px-2 py-1 text-sm rounded-md hover:bg-teal-950 text-gray-300"
+          className="px-2 py-1 text-sm disabled:cursor-not-allowed rounded-md hover:bg-teal-950 text-gray-300"
         >
           {pagination - 2}
         </button>
         <button
           onClick={() => setPagination(pagination - 1)}
           disabled={pagination - 1 < 0}
-          className="px-2 py-1 text-sm rounded-md hover:bg-teal-950 text-gray-300"
+          className="px-2 py-1 text-sm disabled:cursor-not-allowed rounded-md hover:bg-teal-950 text-gray-300"
         >
           {pagination - 1}
         </button>
