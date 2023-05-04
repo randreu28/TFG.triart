@@ -1,7 +1,7 @@
 import { selectionAtom } from "@/utils/dashboard.store";
 import { Database } from "@/utils/db.types";
 import { CubeIcon } from "@heroicons/react/24/outline";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 
 type Props = Database["public"]["Tables"]["artwork"]["Row"];
 
@@ -62,7 +62,7 @@ export function Row({
           {visiblity}
         </span>
       </td>
-      <td className="p-4 text-sm text-gray-300 whitespace-nowrap">{id}</td>
+      <td className="p-4 text-sm text-gray-300 whitespace-nowrap">{views}</td>
     </tr>
   );
 }
