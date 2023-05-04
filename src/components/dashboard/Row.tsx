@@ -3,7 +3,14 @@ import { CubeIcon } from "@heroicons/react/24/outline";
 
 type Props = Database["public"]["Tables"]["artwork"]["Row"];
 
-export function Row({ created_at, file_name, title, views, visiblity }: Props) {
+export function Row({
+  created_at,
+  file_name,
+  title,
+  views,
+  visiblity,
+  id,
+}: Props) {
   const date = new Intl.DateTimeFormat("en-EN", { dateStyle: "long" }).format(
     new Date(Date.parse(created_at))
   );
@@ -12,7 +19,11 @@ export function Row({ created_at, file_name, title, views, visiblity }: Props) {
     <tr className="h-[70px]">
       <td className="p-4 text-sm font-medium whitespace-nowrap">
         <div className="inline-flex items-center gap-x-3">
-          <input type="checkbox" className="accent-teal-500" />
+          <input
+            onChange={(e) => console.log(e.target.checked, id)}
+            type="checkbox"
+            className="accent-teal-500"
+          />
           <div className="flex items-center gap-x-2">
             <div className="flex items-center justify-center w-8 h-8 min-w-[2rem] text-teal-500 rounded-full bg-teal-950">
               <CubeIcon className="h-5 w-5" />
