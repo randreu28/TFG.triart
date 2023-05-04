@@ -1,4 +1,4 @@
-import { artworksAtom, selectionAtom } from "@/utils/dashboard.store";
+import { selectionAtom } from "@/utils/dashboard.store";
 import {
   ArrowUpTrayIcon,
   EyeIcon,
@@ -30,7 +30,26 @@ export default function Options() {
     }
   }
 
-  async function handleEditTite() {}
+  async function handleEditTite() {
+    const newTitle = prompt("Please enter the new title");
+    if (!newTitle) return;
+
+    selection.forEach(async (id) => {
+      const toastID = toast.loading("Loading");
+      const { error } = await supabase
+        .from("artwork")
+        .update({ title: newTitle })
+        .eq("id", id);
+      if (error) {
+        toast.error(error.message, { id: toastID, duration: 5000 });
+      } else {
+        toast.success("Artwork's title updated successfully", {
+          id: toastID,
+          duration: 5000,
+        });
+      }
+    });
+  }
 
   async function handleVisibilityChange() {}
 
