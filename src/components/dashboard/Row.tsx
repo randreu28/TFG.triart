@@ -40,9 +40,12 @@ export function Row({
               <CubeIcon className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="font-normal text-white whitespace-normal line-clamp-1">
+              <a
+                href={"/artwork/" + id}
+                className="font-normal text-white whitespace-normal line-clamp-1 hover:underline"
+              >
                 {file_name}
-              </h2>
+              </a>
               <p className="text-xs font-normal text-gray-400">
                 {size / 1000} KB
               </p>
