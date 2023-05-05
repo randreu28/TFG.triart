@@ -59,7 +59,7 @@ export default function Dashboard({ session }: Props) {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden border border-gray-700 md:rounded-lg">
               <table className="w-full divide-y divide-gray-700">
-                <thead className="bg-black/50">
+                <thead className="bg-black/50 whitespace-nowrap">
                   <tr>
                     <th
                       scope="col"
