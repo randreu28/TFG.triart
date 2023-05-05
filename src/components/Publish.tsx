@@ -3,7 +3,7 @@
 import { useSupabase } from "@/components/SupabaseProvider";
 import { Session } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 type FormData = {
   title: string;
@@ -20,7 +20,39 @@ export default function Publish({ session }: Props) {
   const { supabase } = useSupabase();
 
   const PublishArtwork = handleSubmit(async ({ file, title, visibility }) => {
-    /* ... */
+    const storageDir = `${session.user.id}/${file[0].name}`;
+
+    const toastID = toast.loading("Loading...");
+    const { error: storageError } = await supabase.storage
+      .from("artwork")
+      .upload(storageDir, file[0]);
+
+    if (storageError) {
+      toast.error(storageError.message, { id: toastID, duration: 5000 });
+      return;
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("artwork").getPublicUrl(storageDir);
+
+    const { error } = await supabase.from("artwork").insert({
+      file_name: file[0].name,
+      title: title,
+      url: publicUrl,
+      user_id: session.user.id,
+      visiblity: visibility,
+    });
+
+    if (error) {
+      toast.error(error.message, { id: toastID, duration: 5000 });
+      return;
+    }
+
+    toast.success("Artwork published succesfully!", {
+      id: toastID,
+      duration: 5000,
+    });
   });
 
   return (
@@ -92,6 +124,7 @@ export default function Publish({ session }: Props) {
           <input
             {...register("file")}
             type="file"
+            accept=".glb,gltf"
             required
             className="rounded bg-[#1B2D2F] p-2 focus:outline-none focus:border focus:border-teal-500"
           />
