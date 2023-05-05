@@ -36,7 +36,7 @@ export default function Dashboard({ session }: Props) {
       .select()
       .eq("user_id", session.user.id)
       .range(from, to)
-      .order("created_at");
+      .order("created_at", { ascending: false });
 
     if (data) {
       setError(undefined);
