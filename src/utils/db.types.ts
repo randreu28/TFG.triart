@@ -14,6 +14,7 @@ export interface Database {
           created_at: string
           file_name: string
           id: number
+          size: number
           title: string
           url: string
           user_id: string
@@ -24,6 +25,7 @@ export interface Database {
           created_at?: string
           file_name: string
           id?: number
+          size: number
           title: string
           url: string
           user_id: string
@@ -34,6 +36,7 @@ export interface Database {
           created_at?: string
           file_name?: string
           id?: number
+          size?: number
           title?: string
           url?: string
           user_id?: string
