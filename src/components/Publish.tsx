@@ -42,6 +42,7 @@ export default function Publish({ session }: Props) {
       url: publicUrl,
       user_id: session.user.id,
       visiblity: visibility,
+      size: file[0].size,
     });
 
     if (error) {
