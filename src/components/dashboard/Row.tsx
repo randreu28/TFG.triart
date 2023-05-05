@@ -53,7 +53,7 @@ export function Row({
           </div>
         </div>
       </td>
-      <td className="p-4 text-sm font-normal text-gray-300 line-clamp-1">
+      <td className="p-4 text-sm font-normal text-gray-300 whitespace-nowrap">
         {title}
       </td>
       <td className="p-4 text-sm text-gray-300 whitespace-nowrap">{date}</td>
