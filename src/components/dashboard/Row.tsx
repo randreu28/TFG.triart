@@ -12,6 +12,7 @@ export function Row({
   views,
   visiblity,
   id,
+  size,
 }: Props) {
   const date = new Intl.DateTimeFormat("en-EN", { dateStyle: "long" }).format(
     new Date(Date.parse(created_at))
@@ -42,7 +43,9 @@ export function Row({
               <h2 className="font-normal text-white whitespace-normal line-clamp-1">
                 {file_name}
               </h2>
-              <p className="text-xs font-normal text-gray-400">20 KB</p>
+              <p className="text-xs font-normal text-gray-400">
+                {size / 1000} KB
+              </p>
             </div>
           </div>
         </div>
