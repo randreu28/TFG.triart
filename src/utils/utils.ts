@@ -28,3 +28,11 @@ export function getPagination(page: number) {
 
   return { from, to };
 }
+/**
+ *  Parses db date to a readable string
+ * */
+export function parseDate(date: string) {
+  return new Intl.DateTimeFormat("en-EN", { dateStyle: "long" }).format(
+    new Date(Date.parse(date))
+  );
+}

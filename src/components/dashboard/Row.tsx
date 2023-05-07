@@ -1,5 +1,6 @@
 import { selectionAtom } from "@/utils/dashboard.store";
 import { Database } from "@/utils/db.types";
+import { parseDate } from "@/utils/utils";
 import { CubeIcon } from "@heroicons/react/24/outline";
 import { useAtom } from "jotai";
 
@@ -14,9 +15,7 @@ export function Row({
   id,
   size,
 }: Props) {
-  const date = new Intl.DateTimeFormat("en-EN", { dateStyle: "long" }).format(
-    new Date(Date.parse(created_at))
-  );
+  const date = parseDate(created_at);
 
   const [selection, setSelection] = useAtom(selectionAtom);
 
