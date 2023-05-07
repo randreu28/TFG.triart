@@ -21,7 +21,7 @@ export function getURL(route: string) {
  * Gets a range of values based on pagination number
  */
 export function getPagination(page: number) {
-  const size = 4;
+  const size = 5;
   const limit = size ? +size : 3;
   const from = page ? page * limit : 0;
   const to = page ? from + size : size;
