@@ -26,7 +26,7 @@ export default function NavBar({ session }: Props) {
   }
 
   return (
-    <nav className="fixed backdrop-blur-lg bg-black/50 w-screen p-4 flex justify-between items-center">
+    <nav className="fixed backdrop-blur-lg bg-black/50 w-screen p-4 flex justify-between items-center z-10">
       <a
         href="/"
         className="flex gap-3 items-center focus:outline-none focus:ring-inset focus:ring-2 focus:rounded"
