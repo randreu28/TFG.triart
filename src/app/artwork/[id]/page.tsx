@@ -1,6 +1,7 @@
 import Scene from "@/components/Scene";
 import { Database } from "@/utils/db.types";
 import { parseDate } from "@/utils/utils";
+import { EyeIcon } from "@heroicons/react/24/outline";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/dist/client/components/headers";
 
@@ -32,12 +33,22 @@ export default async function Artwork({ params: { id } }: Props) {
     throw Error("You don't have permission to see this artwork");
   }
 
+  await supabase
+    .from("artwork")
+    .update({ views: data[0].views + 1 })
+    .eq("id", id);
+
   return (
     <>
       <div className="absolute top-24 right-5 z-20 space-y-3">
         <h1 className="text-3xl">{data[0].title}</h1>
         <p className="float-right text-gray-300">
           {parseDate(data[0].created_at)}
+        </p>
+        <br />
+        <p className="float-right text-gray-300 flex gap-2">
+          <EyeIcon className="h-5 w-5" />
+          {data[0].views} views
         </p>
       </div>
 
