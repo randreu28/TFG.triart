@@ -1,3 +1,4 @@
+import Scene from "@/components/Scene";
 import { Database } from "@/utils/db.types";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/dist/client/components/headers";
@@ -30,12 +31,5 @@ export default async function Artwork({ params: { id } }: Props) {
     throw Error("You don't have permission to see this artwork");
   }
 
-  return (
-    <a
-      href={data[0].url}
-      className="text-teal-500 hover:underline text-center mx-auto"
-    >
-      Download
-    </a>
-  );
+  return <Scene url={data[0].url} />;
 }
