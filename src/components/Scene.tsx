@@ -1,9 +1,11 @@
 "use client";
 
+import { ShareIcon } from "@heroicons/react/24/outline";
 import { Environment, Grid, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Leva, useControls } from "leva";
 import { useEffect, useMemo } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import * as THREE from "three";
 
 type Props = {
@@ -38,11 +40,40 @@ export default function Scene(props: Props) {
     visible: false,
   });
 
+  function handleShareButton() {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success("Link copied to clipboard!");
+  }
+
   return (
     <>
+      <Toaster
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#222",
+            color: "#fff",
+          },
+          success: {
+            iconTheme: {
+              primary: "rgb(0, 184, 166)",
+              secondary: "#222",
+            },
+          },
+        }}
+      />
       <div className="absolute top-24 left-5 z-20">
         <Leva fill />
       </div>
+
+      <button
+        onClick={handleShareButton}
+        className="absolute bottom-10 right-10 z-20 flex gap-5 items-center bg-black/50 rounded p-2 hover:bg-teal-900 transition-colors transition-300"
+      >
+        <ShareIcon className="h-5 w-5" />
+        Share
+      </button>
+
       <Canvas color="red">
         <Model {...props} />
         <OrbitControls />
