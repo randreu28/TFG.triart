@@ -1,5 +1,6 @@
 import Scene from "@/components/Scene";
 import { Database } from "@/utils/db.types";
+import { parseDate } from "@/utils/utils";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/dist/client/components/headers";
 
@@ -31,5 +32,16 @@ export default async function Artwork({ params: { id } }: Props) {
     throw Error("You don't have permission to see this artwork");
   }
 
-  return <Scene url={data[0].url} />;
+  return (
+    <>
+      <div className="absolute top-24 right-5 z-20 space-y-3">
+        <h1 className="text-3xl">{data[0].title}</h1>
+        <p className="float-right text-gray-300">
+          {parseDate(data[0].created_at)}
+        </p>
+      </div>
+
+      <Scene url={data[0].url} />
+    </>
+  );
 }

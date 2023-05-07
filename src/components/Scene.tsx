@@ -68,7 +68,7 @@ export default function Scene(props: Props) {
 
       <button
         onClick={handleShareButton}
-        className="absolute bottom-10 right-10 z-20 flex gap-5 items-center bg-black/50 rounded p-2 hover:bg-teal-900 transition-colors transition-300"
+        className="absolute bottom-5 right-5 z-20 flex gap-5 items-center bg-black/50 rounded p-2 hover:bg-teal-900 transition-colors transition-300"
       >
         <ShareIcon className="h-5 w-5" />
         Share
