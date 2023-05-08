@@ -46,7 +46,7 @@ export default async function Artwork({ params: { id } }: Props) {
           {parseDate(data[0].created_at)}
         </p>
         <br />
-        <p className="float-right text-gray-300 flex gap-2">
+        <p className="justify-end text-gray-300 flex gap-2 w-full pt-3">
           <EyeIcon className="h-5 w-5" />
           {data[0].views} views
         </p>
