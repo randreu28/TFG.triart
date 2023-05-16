@@ -1,6 +1,8 @@
-# Welcome to the TriArt Repo!
+# TriArt: A 3D art sharing space where you can promote your work to the world
 
-This plataform was built for my university thesis. Feel free to check it out!
+This plataform was built for my [university thesis](https://tfg-docs.vercel.app/). Feel free to check it out!
+
+![Image](/readme.png)
 
 User example:
 
